@@ -11,10 +11,10 @@ namespace promad
     {
 
         [Key ]
-        public Guid IdProduct { get; set; }
+        public int IdProduct { get; set; }
 
         [ForeignKey ("")]
-        public Guid IdProvider { get; set; }
+        public int IdProvider { get; set; }
 
         [Column("")]
         public string Code { get; set; }

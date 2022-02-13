@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using promad.Bussines;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,81 +8,46 @@ using System.Threading.Tasks;
 
 namespace promad.Controllers
 {
-    public class Proveedores : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class Proveedores : ControllerBase
     {
-        // GET: Proveedores
-        public ActionResult Index()
+        public ManagerProveedores _managerProveedores;
+
+        public Proveedores(ManagerProveedores managerProveedores)
         {
-            return View();
+            _managerProveedores = managerProveedores;
+
         }
 
-        // GET: Proveedores/Details/5
-        public ActionResult Details(int id)
+        [HttpPost("add - supplier")]
+        public IActionResult AddSupplier([FromBody] supplier supplier)
         {
-            return View();
+            _managerProveedores.Addsupplier(supplier);
+            
+            return Ok();
+
         }
 
-        // GET: Proveedores/Create
-        public ActionResult Create()
+        [HttpGet("get-all-supplier")]
+        public IActionResult getallSupplier()
         {
-            return View();
+            var allsupplier = _managerProveedores.GetAllsupplier();
+            return Ok(allsupplier);
+
         }
 
-        // POST: Proveedores/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+
+        [HttpGet("get-Supplier")]
+        public IActionResult getSupplier(string Code)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+           
+            var code = _managerProveedores.GetCode(Code);
+            return Ok(Code);
         }
 
-        // GET: Proveedores/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Proveedores/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: Proveedores/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Proveedores/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
+

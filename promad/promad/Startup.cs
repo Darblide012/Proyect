@@ -2,11 +2,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using promad.Bussines;
+using promad.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +19,12 @@ namespace promad
 {
     public class Startup
     {
+        public string ConnectionStrings { get; set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            ConnectionStrings = configuration.GetConnectionString("DefaultConnectionString");
         }
 
         public IConfiguration Configuration { get; }
@@ -28,10 +34,13 @@ namespace promad
         {
 
             services.AddControllers();
+
+            services.AddDbContext<Context>(options => options.UseSqlServer(ConnectionStrings));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "promad", Version = "v1" });
             });
+            services.AddTransient<ManagerProveedores>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

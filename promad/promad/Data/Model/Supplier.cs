@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace promad
 {
-    public class Proveers
+    public class supplier
     {
-
         [Key]
-        public string Supplier { get; set; }
+        public int Supplier { get; set; }
 
-        public Guid Code { get; set; }
+        public string Code { get; set; }
 
-        public string BusinessName { get; set; }
+        public string RazonSocila { get; set; }
 
         public string RFC { get; set; }
 

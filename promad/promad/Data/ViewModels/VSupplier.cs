@@ -5,21 +5,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace promad.Data.Model
+namespace promad.Data.ViewModels
 {
-    public class Supplier
+    public class VSupplier
     {
       [Key]
         public int IdProveedor { get; set; }
 
-   
+        [Column("Codigo")]
         public string Codigo { get; set; }
 
-        
-        public string  RazonSocila { get; set; }
+        [Column("Razon Social")]
+        public string RazonSocila { get; set; }
 
-       
+        [Column("RFC")]
         public string RFC { get; set; }
+
 
     }
 }

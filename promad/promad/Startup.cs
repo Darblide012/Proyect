@@ -25,6 +25,7 @@ namespace promad
             Configuration = configuration;
 
             ConnectionStrings = configuration.GetConnectionString("DefaultConnectionString");
+
         }
 
         public IConfiguration Configuration { get; }
@@ -36,11 +37,12 @@ namespace promad
             services.AddControllers();
 
             services.AddDbContext<Context>(options => options.UseSqlServer(ConnectionStrings));
+            services.AddTransient<ManagerProveedores>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "promad", Version = "v1" });
             });
-            services.AddTransient<ManagerProveedores>();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

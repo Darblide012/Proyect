@@ -5,25 +5,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace promad
+namespace promad.Data.ViewModels
 {
-    public class Products
+    public class VProducts
     {
-
-        [Key ]
+        [Key]
         public int IdProduct { get; set; }
 
-        [ForeignKey ("Proveedor")]
+        [ForeignKey("Proveedor")]
         public int IdProvider { get; set; }
 
         [Column("Codigo")]
         public string Code { get; set; }
 
         [Column("Descripcion")]
-        public string  Description { get; set; }
+        public string Description { get; set; }
 
         [Column("Unidad")]
-        public  string Unit { get; set; }
+        public string Unit { get; set; }
 
         [Column("Costo")]
         public float Cost { get; set; }

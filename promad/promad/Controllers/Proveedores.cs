@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using promad.Bussines;
+using promad.Data.Model;
+using promad.Data.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +22,13 @@ namespace promad.Controllers
 
         }
 
+        /// <summary>
+        /// Agregar Proovedor
+        /// </summary>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
         [HttpPost("add - supplier")]
-        public IActionResult AddSupplier([FromBody] supplier supplier)
+        public IActionResult AddSupplier([FromBody] VSupplier supplier)
         {
             _managerProveedores.Addsupplier(supplier);
             
@@ -29,6 +36,11 @@ namespace promad.Controllers
 
         }
 
+
+        /// <summary>
+        /// Mostrar todos los proovedores
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("get-all-supplier")]
         public IActionResult getallSupplier()
         {
@@ -38,6 +50,11 @@ namespace promad.Controllers
         }
 
 
+        /// <summary>
+        /// Mostrar por Codigo de proveedor
+        /// </summary>
+        /// <param name="Code"></param>
+        /// <returns></returns>
         [HttpGet("get-Supplier")]
         public IActionResult getSupplier(string Code)
         {
@@ -47,6 +64,37 @@ namespace promad.Controllers
         }
 
 
+        /// <summary>
+        /// Actualizar por id de razon social
+        /// </summary>
+        /// <param name="RFC"></param>
+        /// <param name="supplier"></param>
+        /// <returns></returns>
+        [HttpPut("Update- razon social")]
+        public IActionResult UpdateRazonSocial(string RFC, [FromBody] VSupplier supplier)
+        {
+            var UpdateRFC = _managerProveedores.UpdatesRazonsocial(RFC,supplier);
+
+            return Ok(UpdateRFC);
+
+        }
+
+
+
+        /// <summary>
+        /// Eliminar proveedor por id
+        /// </summary>
+        /// <param name="idSupplier"></param>
+        /// <returns></returns>
+        [HttpDelete("DeleteIDsupplier")]
+        public IActionResult DeleteidSupplier(int idSupplier)
+        {
+            _managerProveedores.DeleteSupplierByid(idSupplier);
+
+            return Ok();
+
+
+        }
 
     }
 }
